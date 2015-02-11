@@ -122,4 +122,26 @@ class CRUD
         return self::$db->query($sql);
     }
     
+    //字段查询;
+    public static function columns(){
+        $sql="SHOW COLUMNS FROM ".self::$table.";";
+        $data=self::query($sql);
+        return $data;
+    }
+
+    //字段校验
+    public static function ripkey($data=array()){
+        $columns=self::columns();
+        if($columns && is_array($columns)){
+            foreach($columns as $item){
+                $tmp[]=$item['Field'];
+            }
+        }
+        if($data && is_array($data)){
+            foreach($data as $k=>$v){
+                if(!in_array($k,$tmp))unset($data[$k]);
+            }
+        }
+        return $data;
+    }
 }

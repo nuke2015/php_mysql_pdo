@@ -1,9 +1,6 @@
 <?php
-
 // Require the person class file
 require ("Person.class.php");
-
-// Instantiate the person class
 $person = new Person();
 
 // Create new person
@@ -70,8 +67,17 @@ dump($sql);
 $tmp=$person::query($sql);
 dump($tmp);
 
+dump("show columns form table");
+$columns=$person->columns();
+dump($columns);
 
-
+dump("rip the nokey in table");
+$data=array();
+$data['id']=0;
+$data['Id']=0;
+$data['Age']=20;
+$dataok=$person->ripkey($data);
+dump($dataok);
 
 
 
